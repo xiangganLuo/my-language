@@ -11,6 +11,7 @@ import static org.objectweb.asm.Opcodes.*;
  * 类生成器：为整个程序生成一个包含 public static void main(String[]) 的类。
  * 使用 ClassWriter(COMPUTE_FRAMES|COMPUTE_MAXS) 自动计算栈帧与最大栈深度，简化栈管理。
  * 生成类名固定为 com.lxg.gen.Program，运行时通过内存类加载器加载该类并调用 main。
+ *
  * @author xiangganluo
  */
 public class ClassGenerator {

@@ -1,7 +1,9 @@
 package com.lxg.codegen;
 
-import com.lxg.ast.node.*;
 import com.lxg.ast.expr.*;
+import com.lxg.ast.node.Expression;
+import com.lxg.ast.node.Statement;
+import com.lxg.ast.node.ValueType;
 import com.lxg.ast.stmt.*;
 import com.lxg.sema.Local;
 import com.lxg.sema.SymbolTable;
@@ -13,6 +15,7 @@ import static org.objectweb.asm.Opcodes.*;
 /**
  * 代码发射器：将 AST 节点翻译为 ASM 字节码指令（基于 JVM 栈机器）。
  * 该类不负责类/方法的创建，只关注语句与表达式的具体指令序列。
+ *
  * @author xiangganluo
  */
 class CodeEmitter {
@@ -219,10 +222,18 @@ class CodeEmitter {
                     throw new IllegalStateException("Arithmetic expects INT operands");
                 }
                 switch (be.op) {
-                    case ADD: mv.visitInsn(IADD); break;
-                    case SUB: mv.visitInsn(ISUB); break;
-                    case MUL: mv.visitInsn(IMUL); break;
-                    case DIV: mv.visitInsn(IDIV); break;
+                    case ADD:
+                        mv.visitInsn(IADD);
+                        break;
+                    case SUB:
+                        mv.visitInsn(ISUB);
+                        break;
+                    case MUL:
+                        mv.visitInsn(IMUL);
+                        break;
+                    case DIV:
+                        mv.visitInsn(IDIV);
+                        break;
                 }
                 return ValueType.INT;
             }
@@ -240,12 +251,24 @@ class CodeEmitter {
                 Label trueL = new Label();
                 Label endL = new Label();
                 switch (be.op) {
-                    case EQ: mv.visitJumpInsn(IF_ICMPEQ, trueL); break;
-                    case NE: mv.visitJumpInsn(IF_ICMPNE, trueL); break;
-                    case LT: mv.visitJumpInsn(IF_ICMPLT, trueL); break;
-                    case GT: mv.visitJumpInsn(IF_ICMPGT, trueL); break;
-                    case LE: mv.visitJumpInsn(IF_ICMPLE, trueL); break;
-                    case GE: mv.visitJumpInsn(IF_ICMPGE, trueL); break;
+                    case EQ:
+                        mv.visitJumpInsn(IF_ICMPEQ, trueL);
+                        break;
+                    case NE:
+                        mv.visitJumpInsn(IF_ICMPNE, trueL);
+                        break;
+                    case LT:
+                        mv.visitJumpInsn(IF_ICMPLT, trueL);
+                        break;
+                    case GT:
+                        mv.visitJumpInsn(IF_ICMPGT, trueL);
+                        break;
+                    case LE:
+                        mv.visitJumpInsn(IF_ICMPLE, trueL);
+                        break;
+                    case GE:
+                        mv.visitJumpInsn(IF_ICMPGE, trueL);
+                        break;
                 }
                 // 未跳转到 trueL 则为假，压0
                 pushInt(0);
@@ -266,13 +289,27 @@ class CodeEmitter {
     private void pushInt(int v) {
         if (v >= -1 && v <= 5) {
             switch (v) {
-                case -1: mv.visitInsn(ICONST_M1); break;
-                case 0: mv.visitInsn(ICONST_0); break;
-                case 1: mv.visitInsn(ICONST_1); break;
-                case 2: mv.visitInsn(ICONST_2); break;
-                case 3: mv.visitInsn(ICONST_3); break;
-                case 4: mv.visitInsn(ICONST_4); break;
-                case 5: mv.visitInsn(ICONST_5); break;
+                case -1:
+                    mv.visitInsn(ICONST_M1);
+                    break;
+                case 0:
+                    mv.visitInsn(ICONST_0);
+                    break;
+                case 1:
+                    mv.visitInsn(ICONST_1);
+                    break;
+                case 2:
+                    mv.visitInsn(ICONST_2);
+                    break;
+                case 3:
+                    mv.visitInsn(ICONST_3);
+                    break;
+                case 4:
+                    mv.visitInsn(ICONST_4);
+                    break;
+                case 5:
+                    mv.visitInsn(ICONST_5);
+                    break;
             }
         } else if (v >= Byte.MIN_VALUE && v <= Byte.MAX_VALUE) {
             mv.visitIntInsn(BIPUSH, v);

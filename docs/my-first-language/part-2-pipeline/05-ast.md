@@ -1,25 +1,31 @@
 # 第5章 AST：抽象语法树的设计与构建
 
 # 一、前言
+
 AST 是对解析树的“语义化”抽象，去掉语法噪音，仅保留对后续阶段重要的结构。
 
 # 二、目标
+
 - 理解 AST 与 Parse Tree 的差异
 - 掌握左结合折叠、位置信息收集
 - 能用 dump-ast 观察抽象结构
 
 # 三、设计
+
 术语说明：
+
 - SourcePos：源位置 `line:column`
 - 左结合折叠：链式二元运算按左结合构造嵌套 `BinaryExpr`
 
 核心流程图：
+
 ```mermaid
 flowchart LR
   ParseTree --> AstBuilder --> AST
 ```
 
 架构交互图：
+
 ```mermaid
 graph TD
   node[ast/node] --> expr[ast/expr]
@@ -28,7 +34,9 @@ graph TD
 ```
 
 # 四、实现
+
 目录树（关注项）：
+
 ```text
 src/main/java/com/lxg/ast/node
 src/main/java/com/lxg/ast/expr
@@ -38,11 +46,13 @@ src/main/java/com/lxg/frontend/AstBuilder.java
 ```
 
 命令：
+
 ```bash
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/conditions.lxg --dump-ast
 ```
 
 代码对照：左结合的 addition 折叠
+
 ```134:147:src/main/java/com/lxg/frontend/AstBuilder.java
 /** addition：处理 + -，按左结合折叠为 BinaryExpr。 */
 @Override
@@ -59,6 +69,7 @@ public Object visitAddition(LxgParser.AdditionContext ctx) {
 ```
 
 代码对照：primary 中的字符串反转义（完整实现）
+
 ```204:227:src/main/java/com/lxg/frontend/AstBuilder.java
 /**
  * 反转义字符串字面量：将转义序列替换为实际字符。
@@ -87,8 +98,10 @@ private static String unescapeString(String s) {
 ```
 
 # 五、测试
+
 - 运行：`mvn -q -Dtest=AstPrinterTest test`
 - 检查点：`Let/If/Print` 等关键结构是否打印
 
 # 六、总结
+
 - AST 是“语义友好”的中间形态，建立起后续语义与生成的桥梁；保证 `SourcePos` 全链路传递 

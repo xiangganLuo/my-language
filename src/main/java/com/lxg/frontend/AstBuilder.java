@@ -1,12 +1,16 @@
 package com.lxg.frontend;
 
-import com.lxg.antlr.*;
-import com.lxg.ast.node.*;
+import com.lxg.antlr.LxgBaseVisitor;
+import com.lxg.antlr.LxgParser;
 import com.lxg.ast.expr.*;
+import com.lxg.ast.node.Expression;
+import com.lxg.ast.node.SourcePos;
+import com.lxg.ast.node.Statement;
 import com.lxg.ast.program.CompilationUnit;
 import com.lxg.ast.stmt.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 前端构建器：将 ANTLR 解析树（Parse Tree）转换为自定义 AST 结构。
@@ -15,7 +19,7 @@ import java.util.*;
  * 2) 本类以 Visitor 模式访问各层规则节点，按优先级自低向高（equality → comparison → ... → primary）构建 AST
  * 3) 二元运算按“左结合”构造：使用 (op right)* 的迭代方式，依次折叠为 BinaryExpr
  * 4) 每个 AST 节点都会携带 SourcePos，便于后续语义诊断定位
- *
+ * <p>
  * 提示：若不熟悉 ANTLR 生成的 Context API，可用 --dump-parse-tree 观察树形结构，再对照本类的 visit 方法
  *
  * @author xiangganluo
@@ -120,11 +124,20 @@ public class AstBuilder extends LxgBaseVisitor<Object> {
             Object right = visit(ctx.addition(i));
             BinaryOp op;
             switch (opText) {
-                case "<": op = BinaryOp.LT; break;
-                case ">": op = BinaryOp.GT; break;
-                case "<=": op = BinaryOp.LE; break;
-                case ">=": op = BinaryOp.GE; break;
-                default: throw new IllegalStateException("Unknown op: " + opText);
+                case "<":
+                    op = BinaryOp.LT;
+                    break;
+                case ">":
+                    op = BinaryOp.GT;
+                    break;
+                case "<=":
+                    op = BinaryOp.LE;
+                    break;
+                case ">=":
+                    op = BinaryOp.GE;
+                    break;
+                default:
+                    throw new IllegalStateException("Unknown op: " + opText);
             }
             left = new BinaryExpr(pos(ctx.getStart()), (Expression) left, op, (Expression) right);
         }
@@ -170,10 +183,17 @@ public class AstBuilder extends LxgBaseVisitor<Object> {
             String opText = ctx.getChild(0).getText();
             UnaryOp op;
             switch (opText) {
-                case "+": op = UnaryOp.PLUS; break;
-                case "-": op = UnaryOp.MINUS; break;
-                case "!": op = UnaryOp.NOT; break;
-                default: throw new IllegalStateException("Unknown unary op: " + opText);
+                case "+":
+                    op = UnaryOp.PLUS;
+                    break;
+                case "-":
+                    op = UnaryOp.MINUS;
+                    break;
+                case "!":
+                    op = UnaryOp.NOT;
+                    break;
+                default:
+                    throw new IllegalStateException("Unknown unary op: " + opText);
             }
             return new UnaryExpr(pos(ctx.getStart()), op, (Expression) visit(ctx.unary()));
         }
@@ -212,12 +232,24 @@ public class AstBuilder extends LxgBaseVisitor<Object> {
             if (c == '\\' && i + 1 < s.length()) {
                 char n = s.charAt(++i);
                 switch (n) {
-                    case 'n': sb.append('\n'); break;
-                    case 'r': sb.append('\r'); break;
-                    case 't': sb.append('\t'); break;
-                    case '"': sb.append('"'); break;
-                    case '\\': sb.append('\\'); break;
-                    default: sb.append(n); break;
+                    case 'n':
+                        sb.append('\n');
+                        break;
+                    case 'r':
+                        sb.append('\r');
+                        break;
+                    case 't':
+                        sb.append('\t');
+                        break;
+                    case '"':
+                        sb.append('"');
+                        break;
+                    case '\\':
+                        sb.append('\\');
+                        break;
+                    default:
+                        sb.append(n);
+                        break;
                 }
             } else {
                 sb.append(c);

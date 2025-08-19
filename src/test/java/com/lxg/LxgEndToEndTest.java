@@ -6,18 +6,18 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * 端到端测试：给定一段源代码，调用 CLI 的核心方法执行，并断言标准输出。
- *
+ * <p>
  * 学习要点：
  * - 通过替换 System.out 的方式捕获程序输出，验证从“源码→字节码→执行”的完整链路
  * - 使用 Main.runSource 复用生产路径，尽量贴近真实运行时行为
  * - 调试开关全部关闭，保证用例输出稳定
- *
+ * <p>
  * 注：此处未断言错误分支，相关测试见 SemanticErrorTest。
- *
+ * <p>
  * author xiangganluo
  */
 public class LxgEndToEndTest {

@@ -1,24 +1,20 @@
 package com.lxg.sema;
 
-import com.lxg.ast.node.Expression;
-import com.lxg.ast.node.Node;
-import com.lxg.ast.node.SourcePos;
-import com.lxg.ast.node.Statement;
-import com.lxg.ast.node.ValueType;
+import com.lxg.ast.expr.*;
+import com.lxg.ast.node.*;
 import com.lxg.ast.program.CompilationUnit;
 import com.lxg.ast.stmt.*;
-import com.lxg.ast.expr.*;
 
 /**
  * 最小语义检查（教学版）：
  * - 声明与使用：变量须先 let 声明后再使用/赋值
  * - 类型检查：算术运算只接受 INT，比较运算只接受 INT，! 只接受 BOOLEAN
  * - if 条件类型必须为 BOOLEAN
- *
+ * <p>
  * 简化假设：
  * - 使用单一符号表，未构建作用域栈（Block 遮蔽等高级特性可在后续版本引入）
  * - 诊断信息携带 SourcePos（行:列），便于快速定位错误来源
- *
+ * <p>
  * 使用建议：在 codegen 之前运行，若存在错误则打印后终止后续阶段
  *
  * @author xiangganluo
@@ -125,11 +121,21 @@ public class TypeChecker {
             ValueType lt = infer(be.left, symbols, diags);
             ValueType rt = infer(be.right, symbols, diags);
             switch (be.op) {
-                case ADD: case SUB: case MUL: case DIV:
-                    if (lt != ValueType.INT || rt != ValueType.INT) diags.error("Arithmetic expects INT operands" + at(be));
+                case ADD:
+                case SUB:
+                case MUL:
+                case DIV:
+                    if (lt != ValueType.INT || rt != ValueType.INT)
+                        diags.error("Arithmetic expects INT operands" + at(be));
                     return ValueType.INT;
-                case EQ: case NE: case LT: case GT: case LE: case GE:
-                    if (lt != ValueType.INT || rt != ValueType.INT) diags.error("Comparison expects INT operands" + at(be));
+                case EQ:
+                case NE:
+                case LT:
+                case GT:
+                case LE:
+                case GE:
+                    if (lt != ValueType.INT || rt != ValueType.INT)
+                        diags.error("Comparison expects INT operands" + at(be));
                     return ValueType.BOOLEAN;
             }
         }

@@ -24,14 +24,19 @@ my language 是一个专为初学者设计的迷你编程语言项目，通过�
 
 - 准备环境：安装 JDK 1.8 与 Maven（macOS 可 `brew install maven`）
 - 构建：
+
 ```bash
 mvn -q -DskipTests clean package
 ```
+
 - 跑第一个程序：
+
 ```bash
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg
 ```
+
 - 透视编译各阶段（依次开启调试开关）：
+
 ```bash
 # 词法 Token（字符→Token）
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg --dump-tokens
@@ -40,12 +45,16 @@ java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg --dump-parse-
 # AST（解析树→抽象语法树）
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg --dump-ast
 ```
+
 - 导出并反汇编字节码：
+
 ```bash
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg --emit-class=out/Program.class
 javap -v out/Program.class | cat
 ```
+
 - 看一个语义错误示例（含源码位置的诊断）：
+
 ```bash
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/error_undeclared.lxg
 ```
@@ -115,18 +124,18 @@ my-language/
 └── pom.xml                         # Maven 配置
 ```
 
-| 模块名                    | 说明                                   |
-|--------------------------|----------------------------------------|
-| antlr4                   | ANTLR4 语法定义，生成词法/语法分析器     |
-| ast/node                 | AST 基础接口与类型（含 SourcePos）        |
-| ast/expr                 | 表达式节点（字面量/变量/运算）           |
-| ast/stmt                 | 语句节点（let/assign/print/if/block）    |
-| ast/program              | 程序根节点                               |
-| frontend                 | 解析树到 AST 的转换并填充位置信息         |
-| sema                     | 符号表、最小类型检查、诊断信息输出        |
-| codegen                  | 生成 JVM 字节码                           |
-| runtime                  | 内存加载与反射执行                        |
-| tools                    | CLI 与调试开关入口、AST 打印              |
+| 模块名         | 说明                              |
+|-------------|---------------------------------|
+| antlr4      | ANTLR4 语法定义，生成词法/语法分析器          |
+| ast/node    | AST 基础接口与类型（含 SourcePos）        |
+| ast/expr    | 表达式节点（字面量/变量/运算）                |
+| ast/stmt    | 语句节点（let/assign/print/if/block） |
+| ast/program | 程序根节点                           |
+| frontend    | 解析树到 AST 的转换并填充位置信息             |
+| sema        | 符号表、最小类型检查、诊断信息输出               |
+| codegen     | 生成 JVM 字节码                      |
+| runtime     | 内存加载与反射执行                       |
+| tools       | CLI 与调试开关入口、AST 打印              |
 
 ---
 
@@ -171,27 +180,32 @@ graph TD;
 ## 🔍 调试开关使用说明
 
 - --dump-tokens：打印词法 Token（类型与文本），用于观察“字符 → Token”的阶段。
+
 ```bash
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg --dump-tokens
 ```
 
 - --dump-parse-tree：打印解析树（Parse Tree），用于观察“Token → 语法结构”的阶段。
+
 ```bash
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg --dump-parse-tree | cat
 ```
 
 - --dump-ast：打印抽象语法树（AST），用于观察“解析树 → AST”的抽象化结果。
+
 ```bash
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg --dump-ast
 ```
 
 - --emit-class=<path>：将生成的 .class 写入磁盘，便于使用 `javap -v` 反汇编查看字节码。
+
 ```bash
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg --emit-class=out/Program.class
 javap -v out/Program.class | cat
 ```
 
 - 组合示例：同时打印 AST 并导出字节码
+
 ```bash
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg --dump-ast --emit-class=out/Program.class
 ```

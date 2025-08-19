@@ -9,14 +9,14 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * AST 打印器测试：断言关键结构文本存在。
- *
+ * <p>
  * 测试意图：
  * - 确认打印器输出包含主要语法结构的可读描述，便于学习/调试
- *
+ * <p>
  * 覆盖点：
  * - let 声明与二元表达式的左结合折叠（1 + 2）
  * - if/else 结构与条件表达式存在性
@@ -33,7 +33,7 @@ public class AstPrinterTest {
         LxgParser parser = new LxgParser(tokens);
         CompilationUnit unit = new AstBuilder().build(parser.prog());
         String out = AstPrinter.print(unit);
-        assertTrue(out.contains("Let x = (1 ADD 2)".replace("ADD","ADD"))); // 操作符枚举名称
+        assertTrue(out.contains("Let x = (1 ADD 2)".replace("ADD", "ADD"))); // 操作符枚举名称
         assertTrue(out.contains("If cond="));
         assertTrue(out.contains("Print x"));
     }

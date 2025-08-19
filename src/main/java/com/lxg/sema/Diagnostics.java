@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * 简单的诊断信息收集器：记录语义错误，统一输出。
+ *
  * @author xiangganluo
  */
 public class Diagnostics {

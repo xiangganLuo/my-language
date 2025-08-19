@@ -9,14 +9,14 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * 词法层冒烟测试：简单断言 token 序列包含关键类型。
- *
+ * <p>
  * 测试意图：
  * - 验证基础源码能被切分为期望的 Token 序列
- *
+ * <p>
  * 覆盖点：
  * - 关键字与标识符（ID）的区分（'let'/'print' 不应被当作 ID）
  * - 整数字面量（INT）被正确识别

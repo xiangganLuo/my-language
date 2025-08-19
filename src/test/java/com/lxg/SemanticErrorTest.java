@@ -10,14 +10,14 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * 语义错误测试：覆盖未声明变量与类型不匹配两类基础错误。
- *
+ * <p>
  * 测试意图：
  * - 验证 TypeChecker 能发现并报告典型语义错误
- *
+ * <p>
  * 覆盖点：
  * - 使用未声明变量应产生错误，错误消息包含关键字串（Unknown variable）
  * - 赋值类型不匹配（int <- string）应产生错误，错误消息包含关键字串（Type mismatch）

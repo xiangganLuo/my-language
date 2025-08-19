@@ -15,8 +15,6 @@ import org.antlr.v4.runtime.Token;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 命令行入口：解析 -> 构建 AST -> 语义检查 -> 生成字节码 -> 运行。
@@ -25,7 +23,7 @@ import java.util.List;
  * - --dump-parse-tree：打印解析树，用于观察“Token→语法结构”阶段
  * - --dump-ast：打印 AST，用于观察“解析树→AST 抽象化”结果
  * - --emit-class=<path>：写入 .class，便于 javap -v 反汇编观察指令序列
- *
+ * <p>
  * 使用建议：先层层 dump（tokens/parse-tree/ast）再 emit-class，帮助建立从源码到字节码的心智模型。
  *
  * @author xiangganluo
