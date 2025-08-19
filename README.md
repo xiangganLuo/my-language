@@ -22,16 +22,16 @@ my language 是一个专为初学者设计的迷你编程语言项目，通过�
 
 ## ⚡ 5 分钟快速上手
 
-- 1) 准备环境：安装 JDK 1.8 与 Maven（macOS 可 `brew install maven`）
-- 2) 构建：
+- 准备环境：安装 JDK 1.8 与 Maven（macOS 可 `brew install maven`）
+- 构建：
 ```bash
 mvn -q -DskipTests clean package
 ```
-- 3) 跑第一个程序：
+- 跑第一个程序：
 ```bash
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg
 ```
-- 4) 透视编译各阶段（依次开启调试开关）：
+- 透视编译各阶段（依次开启调试开关）：
 ```bash
 # 词法 Token（字符→Token）
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg --dump-tokens
@@ -40,12 +40,12 @@ java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg --dump-parse-
 # AST（解析树→抽象语法树）
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg --dump-ast
 ```
-- 5) 导出并反汇编字节码：
+- 导出并反汇编字节码：
 ```bash
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg --emit-class=out/Program.class
 javap -v out/Program.class | cat
 ```
-- 6) 看一个语义错误示例（含源码位置的诊断）：
+- 看一个语义错误示例（含源码位置的诊断）：
 ```bash
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/error_undeclared.lxg
 ```
