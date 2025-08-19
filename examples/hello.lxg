@@ -3,4 +3,4 @@ if (x > 2) { print x; } else { print 0; }
 let msg = "Hello, LXG!";
 print msg;
 print 10 * (3 + 2);
-print true; 
+print true;
