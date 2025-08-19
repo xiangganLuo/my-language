@@ -49,11 +49,6 @@ javap -v out/Program.class | cat
 ```bash
 java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/error_undeclared.lxg
 ```
-- 更多请见学习路径的关键章节：
-
-  - [第一阶段：环境准备与跑通主线](docs/Quick Start.md#第一阶段环境准备与跑通主线)
-  - [第二阶段：透视调试开关](docs/Quick Start.md#第二阶段透视调试开关建议依次开启)
-  - [第五阶段：用测试来拆层理解](docs/Quick Start.md#第五阶段用测试来拆层理解)
 
 ---
 
