@@ -20,10 +20,10 @@
 核心流程图：
 
 ```mermaid
-flowchart LR
+graph LR
   AST --> E[CodeEmitter 发射语句/表达式]
   E --> G[ClassGenerator 生成 main]
-  G --> C[.class]
+  G --> C[class file]
   C --> R[javap -v 对照]
 ```
 
@@ -32,8 +32,8 @@ flowchart LR
 ```mermaid
 graph TD
   CodeEmitter -->|发射指令| ClassGenerator
-  ClassGenerator -->|输出字节| .class
-  .class -->|反汇编| javap
+  ClassGenerator -->|输出字节| C[".class"]
+  C -->|反汇编| J[javap]
 ```
 
 # 四、实现

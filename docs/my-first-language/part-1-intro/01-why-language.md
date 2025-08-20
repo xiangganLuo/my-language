@@ -43,7 +43,7 @@ java -jar target/my-language-0.1.0-SNAPSHOT.jar examples/hello.lxg
 3) 核心流程图（从源码到执行）
 
 ```mermaid
-flowchart LR
+graph LR
   A[.lxg 源码] --> B[词法 Lexer]
   B --> C[语法 Parser]
   C --> D[AST 构建 AstBuilder]

@@ -20,7 +20,7 @@
 核心流程图：
 
 ```mermaid
-flowchart LR
+graph LR
   Args --> Parse[参数解析]
   Parse --> Pipeline[runSource]
   Pipeline --> Dumps[dump-* 输出]

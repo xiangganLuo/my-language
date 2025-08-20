@@ -20,7 +20,7 @@
 核心流程图（扩展路径）：
 
 ```mermaid
-flowchart LR
+graph LR
   G4[Grammar Lxg.g4] --> AST[AstBuilder]
   AST --> Sema[TypeChecker]
   Sema --> CG[CodeEmitter]

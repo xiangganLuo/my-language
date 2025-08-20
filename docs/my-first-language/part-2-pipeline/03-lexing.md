@@ -20,7 +20,7 @@
 核心流程图：
 
 ```mermaid
-flowchart LR
+graph LR
   Source --> Lexer --> Tokens
 ```
 

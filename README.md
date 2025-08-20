@@ -120,7 +120,7 @@ my-language/
 │   ├── error_undeclared.lxg        # 未声明变量
 │   └── error_type_mismatch.lxg     # 类型不匹配
 ├── docs/
-│   └── Quick Start.md            # 学习路径（独立文档）
+│   └── my-first-language            # 项目博客
 └── pom.xml                         # Maven 配置
 ```
 

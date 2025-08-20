@@ -20,8 +20,8 @@
 核心流程图：
 
 ```mermaid
-flowchart LR
-  Bytes[byte[] class] --> CL[InMemoryClassLoader]
+graph LR
+  B[byte array class] --> CL[InMemoryClassLoader]
   CL --> K[loadClass]
   K --> R[Reflect main invoke]
 ```
@@ -30,7 +30,9 @@ flowchart LR
 
 ```mermaid
 graph TD
-  ClassGenerator -->|byte[]| InMemoryClassLoader -->|Class<?>| LxgShell -->|invoke| main
+  CG[ClassGenerator] --> L[InMemoryClassLoader]
+  L --> S[LxgShell]
+  S --> M[main]
 ```
 
 # 四、实现

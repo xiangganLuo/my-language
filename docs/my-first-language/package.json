@@ -1,0 +1,13 @@
+{
+  "name": "my-language-docs",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "docs:dev": "vuepress dev .",
+    "docs:build": "vuepress build ."
+  },
+  "devDependencies": {
+    "vuepress": "^1.9.9",
+    "vuepress-plugin-mermaidjs": "^1.9.1"
+  }
+}

@@ -15,7 +15,7 @@
 核心流程图：
 
 ```mermaid
-flowchart LR
+graph LR
   G4[Lxg.g4] --> AntlrPlugin[antlr4-maven-plugin]
   AntlrPlugin --> Gen[generated-sources]
   Gen --> Compile[maven-compiler-plugin]

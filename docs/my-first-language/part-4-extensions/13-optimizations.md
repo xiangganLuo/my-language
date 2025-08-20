@@ -15,7 +15,7 @@
 核心流程图：
 
 ```mermaid
-flowchart LR
+graph LR
   AST --> Opt[可选优化] --> Gen[CodeEmitter]
   Gen --> Class[.class with LineNumberTable]
 ```

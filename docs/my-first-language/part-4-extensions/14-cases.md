@@ -15,7 +15,7 @@
 核心流程图：
 
 ```mermaid
-flowchart LR
+graph LR
   Example.lxg --> Pipeline[解析/AST/语义/生成] --> Output
 ```
 

@@ -75,3 +75,9 @@ functions/mock
 screenshot
 .firebase
 sessionStore
+
+# 文档站点（VuePress）
+docs/**/node_modules/
+docs/**/.vuepress/dist/
+docs/**/.vuepress/.cache/
+docs/**/.vuepress/.temp/

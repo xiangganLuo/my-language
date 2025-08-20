@@ -15,7 +15,7 @@
 核心流程图：
 
 ```mermaid
-flowchart LR
+graph LR
   Cases --> LexerTest --> ASTTest --> SemaTest --> E2E
 ```
 

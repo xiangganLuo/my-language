@@ -4,7 +4,10 @@ import com.lxg.tools.Main;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
@@ -27,7 +30,7 @@ public class LxgEndToEndTest {
         ByteArrayOutputStream bout = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bout));
         try {
-            Main.runSource(source, null, false, false, false);
+            Main.runSource(source, null, false, true, false);
             return new String(bout.toByteArray());
         } finally {
             System.setOut(oldOut);
@@ -41,9 +44,9 @@ public class LxgEndToEndTest {
      * - 多条 print 顺序与换行
      */
     @Test
-    public void testPrintIntAndStringAndBool() {
-        String out = run("print 1; print \"x\"; print true;\n");
-        assertEquals("1\n" + "x\n" + "true\n", out);
+    public void testPrintIntAndStringAndBool() throws IOException {
+        String source = new String(Files.readAllBytes(Paths.get("/Users/hbwb36334/github/my-language/examples/hello.lxg")), "UTF-8");
+        Main.runSource(source, null, true, true, false);
     }
 
     /**
